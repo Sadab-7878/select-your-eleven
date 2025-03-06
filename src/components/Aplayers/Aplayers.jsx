@@ -27,7 +27,27 @@ const Aplayers = () => {
             ))}
           </div>
         </div>
-        <div></div>
+
+        {/* Tab Content */}
+
+
+        <div className="m-10">
+
+          {
+            activetab === "Available" && 
+            <div>
+
+              
+
+            </div>
+            
+          }
+
+          {
+            activetab === "Selected (0)" && <div>Selected Tab</div>
+          }
+
+        </div>
       </div>
     </>
   );
