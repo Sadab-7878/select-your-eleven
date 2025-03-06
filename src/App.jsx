@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header/Header";
 import Hero from "./components/Hero/Hero";
+import Aplayers from "./components/Aplayers/Aplayers";
 
 function App() {
   const [increasemoney, setIncreasemoney] = useState(0);
@@ -14,6 +15,7 @@ function App() {
     <>
       <Header increasemoney={increasemoney} />
       <Hero claimmoney={claimmoney} />
+      <Aplayers />
     </>
   );
 }
