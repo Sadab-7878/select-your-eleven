@@ -28,9 +28,9 @@ const Hero = ({ claimmoney }) => {
           <div className="border border-[#E7FE29] w-[200px] h-[50px] rounded-[16px] flex justify-center items-center cursor-pointer">
             <button
               onClick={claimmoney}
-              className="w-[184px] h-[34px] bg-[#E7FE29] rounded-[12px] cursor-pointer"
+              className="w-[184px] h-[34px] bg-[#E7FE29] rounded-[12px] cursor-pointer text-[16px] font-sora font-[700]"
             >
-              Claim
+              Claim Free Credit
             </button>
           </div>
         </div>
