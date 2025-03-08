@@ -27,6 +27,11 @@ const Aplayers = ({ increasemoney, setIncreasemoney }) => {
     }
   };
 
+  const removeitem = (id) => {
+    const remainingplayers = selectedplayers.filter((p) => p.playerId !== id);
+    setselectedplayers(remainingplayers);
+  };
+
   useEffect(() => {
     fetch("players.json")
       .then((res) => res.json())
@@ -35,6 +40,10 @@ const Aplayers = ({ increasemoney, setIncreasemoney }) => {
 
   useEffect(() => {
     setSelectedCount(selectedplayers.length);
+
+    if (activetab !== "Available") {
+      setActivetab(`Selected (${selectedplayers.length})`);
+    }
   }, [selectedplayers]);
 
   return (
@@ -81,14 +90,16 @@ const Aplayers = ({ increasemoney, setIncreasemoney }) => {
           )}
 
           {activetab === `Selected (${selectedCount})` && (
-            <div>
+            <div className="space-y-4">
               {/* display selected players here */}
 
-              {
-                selectedplayers.map((player) => (
-                  <Aplayerselected key={player.playerId} player={player}/>
-                ))
-              }
+              {selectedplayers.map((player) => (
+                <Aplayerselected
+                  key={player.playerId}
+                  player={player}
+                  removeitem={removeitem}
+                />
+              ))}
             </div>
           )}
         </div>
