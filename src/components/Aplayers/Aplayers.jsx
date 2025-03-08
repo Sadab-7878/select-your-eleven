@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Aplayer from "../Aplayer/Aplayer";
 import { ToastContainer, toast } from "react-toastify";
+import Aplayerselected from "../Aplayerselected/Aplayerselected";
 
 const Aplayers = ({ increasemoney, setIncreasemoney }) => {
   const [activetab, setActivetab] = useState("Available");
@@ -80,7 +81,15 @@ const Aplayers = ({ increasemoney, setIncreasemoney }) => {
           )}
 
           {activetab === `Selected (${selectedCount})` && (
-            <div>Selected Tab</div>
+            <div>
+              {/* display selected players here */}
+
+              {
+                selectedplayers.map((player) => (
+                  <Aplayerselected key={player.playerId} player={player}/>
+                ))
+              }
+            </div>
           )}
         </div>
       </div>
