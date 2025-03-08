@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "../../assets/logo.png";
-import dollar from '../../assets/dollar 1.png'
-const Header = ({increasemoney}) => {
+import dollar from "../../assets/dollar 1.png";
+const Header = ({ increasemoney }) => {
   return (
     <>
       <div className="flex justify-between m-10">

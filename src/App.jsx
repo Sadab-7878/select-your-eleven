@@ -6,16 +6,18 @@ import Aplayers from "./components/Aplayers/Aplayers";
 function App() {
   const [increasemoney, setIncreasemoney] = useState(0);
 
-  const claimmoney = () => {
-    const amount = increasemoney + 6000000;
 
-    setIncreasemoney(amount);
+  const claimmoney = () => {
+    setIncreasemoney((prevMoney) => prevMoney + 6000000);
   };
+
+ 
+
   return (
     <>
       <Header increasemoney={increasemoney} />
       <Hero claimmoney={claimmoney} />
-      <Aplayers />
+      <Aplayers increasemoney={increasemoney} setIncreasemoney={setIncreasemoney}/>
     </>
   );
 }

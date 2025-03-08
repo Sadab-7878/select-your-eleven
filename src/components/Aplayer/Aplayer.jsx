@@ -1,9 +1,11 @@
 import React from "react";
 import Userlogo from "../../assets/user 1.png";
 import flag from "../../assets/flag 1.png";
-const Aplayer = ({ player }) => {
+
+const Aplayer = ({ player, buyPlayer }) => {
   const { image, name, country, role, battingType, bowlingType, biddingPrice } =
     player;
+
   return (
     <>
       <div className="w-[424px] h-[528px] border flex flex-col justify-center px-5 my-10 rounded-[16px] border-gray-200 ">
@@ -48,7 +50,10 @@ const Aplayer = ({ player }) => {
               <p className="text-[16px] font-sora font-[600]">
                 Price: {biddingPrice}
               </p>
-              <button className="border w-[134px] h-[36px] rounded-[8px] border-gray-200 text-[14px] font-[400] font-sora cursor-pointer">
+              <button
+                onClick={() => buyPlayer(player)}
+                className="border w-[134px] h-[36px] rounded-[8px] border-gray-200 text-[14px] font-[400] font-sora cursor-pointer"
+              >
                 Choose Player
               </button>
             </div>

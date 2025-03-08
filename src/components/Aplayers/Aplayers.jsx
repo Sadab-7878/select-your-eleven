@@ -1,15 +1,40 @@
 import React, { useEffect, useState } from "react";
 import Aplayer from "../Aplayer/Aplayer";
+import { ToastContainer, toast } from "react-toastify";
 
-const Aplayers = () => {
+const Aplayers = ({ increasemoney, setIncreasemoney }) => {
   const [activetab, setActivetab] = useState("Available");
   const [players, setPlayers] = useState([]);
+  const [selectedplayers, setselectedplayers] = useState([]);
+  const [selectedCount, setSelectedCount] = useState();
+
+  const buyPlayer = (player) => {
+    const price = parseInt(player.biddingPrice.replace(/[$,]/g, ""), 10);
+
+    if (increasemoney >= price) {
+      if (selectedplayers.some((p) => p.playerId === player.playerId)) {
+        toast.warn("Player already bought");
+      } else {
+        setIncreasemoney((prevMoney) => prevMoney - price);
+        setselectedplayers([...selectedplayers, player]);
+        toast.success(
+          `${player.name} has been bought successfully for $${price}`
+        );
+      }
+    } else {
+      toast.warn("Not enough money! Claim more money.");
+    }
+  };
 
   useEffect(() => {
     fetch("players.json")
       .then((res) => res.json())
       .then((data) => setPlayers(data.players));
   }, []);
+
+  useEffect(() => {
+    setSelectedCount(selectedplayers.length);
+  }, [selectedplayers]);
 
   return (
     <>
@@ -21,7 +46,7 @@ const Aplayers = () => {
             </p>
           </div>
           <div className="inline-flex border border-gray-200 rounded-2xl">
-            {["Available", "Selected (0)"].map((tab, index) => (
+            {["Available", `Selected (${selectedCount})`].map((tab, index) => (
               <button
                 key={tab}
                 onClick={() => setActivetab(tab)}
@@ -42,18 +67,25 @@ const Aplayers = () => {
         {/* Tab Content */}
 
         <div className="mx-10 my-10">
-
           {activetab === "Available" && (
             <div className="flex flex-wrap justify-between items-center">
               {players.map((player) => (
-                <Aplayer key={player.playerId} player={player} />
+                <Aplayer
+                  key={player.playerId}
+                  player={player}
+                  buyPlayer={buyPlayer}
+                />
               ))}
             </div>
           )}
 
-          {activetab === "Selected (0)" && <div>Selected Tab</div>}
+          {activetab === `Selected (${selectedCount})` && (
+            <div>Selected Tab</div>
+          )}
         </div>
       </div>
+
+      <ToastContainer />
     </>
   );
 };
